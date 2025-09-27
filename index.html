@@ -13,7 +13,8 @@
 
         body {
             font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: url('https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80') center/cover no-repeat fixed;
+            background-color: #0891b2;
             min-height: 100vh;
             padding: 20px;
         }
@@ -21,10 +22,11 @@
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            background: rgba(255, 255, 255, 0.95);
+            background: rgba(255, 255, 255, 0.3);
             border-radius: 15px;
             padding: 30px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            backdrop-filter: blur(10px);
         }
 
         header {
@@ -53,9 +55,10 @@
         table {
             width: 100%;
             border-collapse: collapse;
-            background: white;
+            background: rgba(255, 255, 255, 0.3);
             border-radius: 10px;
             overflow: hidden;
+            backdrop-filter: blur(5px);
         }
 
         thead {
@@ -78,13 +81,13 @@
         }
 
         tbody tr:hover {
-            background-color: #f8f9fa;
+            background-color: rgba(248, 249, 250, 0.4);
             transform: scale(1.01);
             transition: all 0.3s ease;
         }
 
         tbody tr:nth-child(even) {
-            background-color: #f8f9fa;
+            background-color: rgba(248, 249, 250, 0.2);
         }
 
         /* 해변 이름과 이미지 */
@@ -208,10 +211,11 @@
 
         /* 범례 스타일 */
         .legend {
-            background: #f8f9fa;
+            background: rgba(248, 249, 250, 0.3);
             padding: 20px;
             border-radius: 10px;
             margin-bottom: 20px;
+            backdrop-filter: blur(5px);
         }
 
         .legend h3 {
@@ -233,10 +237,11 @@
 
         /* 팁 섹션 */
         .tips {
-            background: #e8f5e8;
+            background: rgba(232, 245, 232, 0.3);
             padding: 20px;
             border-radius: 10px;
             border-left: 5px solid #27ae60;
+            backdrop-filter: blur(5px);
         }
 
         .tips h3 {
@@ -605,17 +610,6 @@
         document.addEventListener('DOMContentLoaded', function() {
             createTable();
             
-            // 현재 시간 추천 표시
-            const container = document.querySelector('.container');
-            const timeRecommendation = document.createElement('div');
-            timeRecommendation.className = 'time-recommendation';
-            timeRecommendation.innerHTML = `
-                <div style="background: #3498db; color: white; padding: 15px; border-radius: 10px; text-align: center; margin-bottom: 20px;">
-                    ${getTimeRecommendation()}
-                </div>
-            `;
-            container.insertBefore(timeRecommendation, container.firstChild.nextSibling);
-            
             // 테이블 행 클릭 이벤트
             const tableRows = document.querySelectorAll('#surf-spots-body tr');
             tableRows.forEach(row => {
@@ -629,4 +623,4 @@
         });
     </script>
 </body>
-</html>
+</html> 
