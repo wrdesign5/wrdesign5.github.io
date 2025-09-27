@@ -20,7 +20,8 @@
 
         .hero {
             height: 100vh;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.8) 0%, rgba(118, 75, 162, 0.8) 100%), 
+                        url('https://raw.githubusercontent.com/wrdesign5/wrdesign5.github.io/main/images/Featured-image-Uluwatu-Bali-Indonesia-1244x700.jpg') center/cover;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -149,6 +150,8 @@
             background: linear-gradient(45deg, #667eea, #764ba2);
             position: relative;
             overflow: hidden;
+            background-size: cover;
+            background-position: center;
         }
 
         .spot-image::before {
@@ -158,8 +161,48 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 20"><path d="M0,10 Q25,0 50,10 T100,10 V20 H0 Z" fill="%23ffffff" fill-opacity="0.1"/></svg>') repeat-x;
-            animation: wave 8s ease-in-out infinite;
+            background: rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+        }
+
+        .spot-card:hover .spot-image::before {
+            background: rgba(0,0,0,0.1);
+        }
+
+        .spot-image::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 60px;
+            background: linear-gradient(transparent, rgba(255,255,255,0.2));
+            z-index: 1;
+        }
+
+        /* 각 스팟별 이미지 */
+        .spot-card[data-spot="yangyang"] .spot-image {
+            background-image: url('https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+        }
+
+        .spot-card[data-spot="sokcho"] .spot-image {
+            background-image: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2073&q=80');
+        }
+
+        .spot-card[data-spot="busan"] .spot-image {
+            background-image: url('https://images.unsplash.com/photo-1544027993-37dbfe43562a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+        }
+
+        .spot-card[data-spot="pohang"] .spot-image {
+            background-image: url('https://images.unsplash.com/photo-1559827260-dc66d52bef19?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+        }
+
+        .spot-card[data-spot="ulsan"] .spot-image {
+            background-image: url('https://images.unsplash.com/photo-1439066615861-d1af74d74000?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2073&q=80');
+        }
+
+        .spot-card[data-spot="gangneung"] .spot-image {
+            background-image: url('https://images.unsplash.com/photo-1582719508461-905c673771fd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2025&q=80');
         }
 
         .spot-content {
@@ -247,13 +290,45 @@
             color: #667eea;
         }
 
+        .modal-image {
+            width: 100%;
+            height: 250px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .modal-image::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 80px;
+            background: linear-gradient(transparent, rgba(0,0,0,0.6));
+            z-index: 1;
+        }
+
+        .image-credit {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            color: white;
+            font-size: 0.7rem;
+            background: rgba(0,0,0,0.5);
+            padding: 2px 6px;
+            border-radius: 4px;
+            z-index: 2;
+        }
+
         .modal-title {
             font-size: 1.8rem;
             color: #2c3e50;
             margin-bottom: 1rem;
         }
-
-        .modal-info {
             margin-bottom: 1rem;
         }
 
@@ -448,6 +523,7 @@
         const spotDetails = {
             yangyang: {
                 title: "양양 죽도해변",
+                image: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
                 details: `
                     <div class="modal-info">
                         <strong>위치:</strong> 강원도 양양군 현북면 하조대해수욕장길
@@ -468,6 +544,7 @@
             },
             sokcho: {
                 title: "속초 외옹치해변",
+                image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2073&q=80",
                 details: `
                     <div class="modal-info">
                         <strong>위치:</strong> 강원도 속초시 외옹치길
@@ -488,6 +565,7 @@
             },
             busan: {
                 title: "부산 송정해변",
+                image: "https://images.unsplash.com/photo-1544027993-37dbfe43562a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
                 details: `
                     <div class="modal-info">
                         <strong>위치:</strong> 부산광역시 해운대구 송정동
@@ -508,6 +586,7 @@
             },
             pohang: {
                 title: "포항 구룡포해변",
+                image: "https://images.unsplash.com/photo-1559827260-dc66d52bef19?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
                 details: `
                     <div class="modal-info">
                         <strong>위치:</strong> 경상북도 포항시 남구 구룡포읍
@@ -528,6 +607,7 @@
             },
             ulsan: {
                 title: "울산 일산해변",
+                image: "https://images.unsplash.com/photo-1439066615861-d1af74d74000?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2073&q=80",
                 details: `
                     <div class="modal-info">
                         <strong>위치:</strong> 울산광역시 동구 일산동
@@ -548,6 +628,7 @@
             },
             gangneung: {
                 title: "강릉 사천해변",
+                image: "https://images.unsplash.com/photo-1582719508461-905c673771fd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2025&q=80",
                 details: `
                     <div class="modal-info">
                         <strong>위치:</strong> 강원도 강릉시 사천면
@@ -574,7 +655,12 @@
                 const spotData = spotDetails[spotId];
                 
                 modalTitle.textContent = spotData.title;
-                modalBody.innerHTML = spotData.details;
+                modalBody.innerHTML = `
+                    <div class="modal-image" style="background-image: url('${spotData.image}')">
+                        <div class="image-credit">Photo: Unsplash</div>
+                    </div>
+                    ${spotData.details}
+                `;
                 modal.style.display = 'block';
                 
                 // 모달 애니메이션
@@ -618,4 +704,4 @@
         });
     </script>
 </body>
-</html>
+</html> 
