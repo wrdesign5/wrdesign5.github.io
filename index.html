@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>한국 동쪽 서핑 스팟</title>
+    <title>한국 서핑 스팟 가이드</title>
     <style>
         * {
             margin: 0;
@@ -12,696 +12,621 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            overflow-x: hidden;
-        }
-
-        .hero {
-            height: 100vh;
-            background: linear-gradient(135deg, rgba(102, 126, 234, 0.8) 0%, rgba(118, 75, 162, 0.8) 100%), 
-                        url('https://raw.githubusercontent.com/wrdesign5/wrdesign5.github.io/main/images/Featured-image-Uluwatu-Bali-Indonesia-1244x700.jpg') center/cover;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 200"><path d="M0,100 C150,200 350,0 500,100 C650,200 850,0 1000,100 L1000,200 L0,200 Z" fill="%23ffffff" fill-opacity="0.1"/></svg>') repeat-x;
-            animation: wave 10s ease-in-out infinite;
-        }
-
-        @keyframes wave {
-            0%, 100% { transform: translateX(0); }
-            50% { transform: translateX(-50px); }
-        }
-
-        .hero-content {
-            z-index: 1;
-            color: white;
-        }
-
-        .hero h1 {
-            font-size: 4rem;
-            margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-            animation: fadeInUp 1s ease-out;
-        }
-
-        .hero p {
-            font-size: 1.5rem;
-            margin-bottom: 2rem;
-            animation: fadeInUp 1s ease-out 0.2s both;
-        }
-
-        .cta-button {
-            display: inline-block;
-            padding: 15px 30px;
-            background: rgba(255,255,255,0.2);
-            color: white;
-            text-decoration: none;
-            border-radius: 50px;
-            backdrop-filter: blur(10px);
-            border: 2px solid rgba(255,255,255,0.3);
-            transition: all 0.3s ease;
-            animation: fadeInUp 1s ease-out 0.4s both;
-        }
-
-        .cta-button:hover {
-            background: rgba(255,255,255,0.3);
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
         }
 
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 20px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
         }
 
-        .section {
-            padding: 80px 0;
-        }
-
-        .section-title {
+        header {
             text-align: center;
+            margin-bottom: 30px;
+        }
+
+        header h1 {
+            color: #2c3e50;
             font-size: 2.5rem;
-            margin-bottom: 3rem;
-            color: #2c3e50;
-            position: relative;
+            margin-bottom: 10px;
         }
 
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 3px;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            border-radius: 2px;
-        }
-
-        .spots-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .spot-card {
-            background: white;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-
-        .spot-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
-        }
-
-        .spot-image {
-            height: 200px;
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            position: relative;
-            overflow: hidden;
-            background-size: cover;
-            background-position: center;
-        }
-
-        .spot-image::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0,0,0,0.3);
-            transition: all 0.3s ease;
-        }
-
-        .spot-card:hover .spot-image::before {
-            background: rgba(0,0,0,0.1);
-        }
-
-        .spot-image::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 60px;
-            background: linear-gradient(transparent, rgba(255,255,255,0.2));
-            z-index: 1;
-        }
-
-        /* 각 스팟별 이미지 */
-        .spot-card[data-spot="yangyang"] .spot-image {
-            background-image: url('https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
-        }
-
-        .spot-card[data-spot="sokcho"] .spot-image {
-            background-image: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2073&q=80');
-        }
-
-        .spot-card[data-spot="busan"] .spot-image {
-            background-image: url('https://images.unsplash.com/photo-1544027993-37dbfe43562a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
-        }
-
-        .spot-card[data-spot="pohang"] .spot-image {
-            background-image: url('https://images.unsplash.com/photo-1559827260-dc66d52bef19?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
-        }
-
-        .spot-card[data-spot="ulsan"] .spot-image {
-            background-image: url('https://images.unsplash.com/photo-1439066615861-d1af74d74000?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2073&q=80');
-        }
-
-        .spot-card[data-spot="gangneung"] .spot-image {
-            background-image: url('https://images.unsplash.com/photo-1582719508461-905c673771fd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2025&q=80');
-        }
-
-        .spot-content {
-            padding: 1.5rem;
-        }
-
-        .spot-name {
-            font-size: 1.3rem;
-            font-weight: bold;
-            margin-bottom: 0.5rem;
-            color: #2c3e50;
-        }
-
-        .spot-location {
+        header p {
             color: #7f8c8d;
-            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .table-container {
+            overflow-x: auto;
+            margin-bottom: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        thead {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+        }
+
+        th {
+            padding: 15px 10px;
+            text-align: center;
+            color: white;
+            font-weight: bold;
             font-size: 0.9rem;
         }
 
-        .spot-description {
-            color: #555;
-            line-height: 1.6;
-            margin-bottom: 1rem;
-        }
-
-        .spot-features {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-        }
-
-        .feature-tag {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-            padding: 0.3rem 0.8rem;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 500;
-        }
-
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0,0,0,0.8);
-            backdrop-filter: blur(5px);
-        }
-
-        .modal-content {
-            background-color: white;
-            margin: 5% auto;
-            padding: 2rem;
-            border-radius: 20px;
-            width: 90%;
-            max-width: 600px;
-            position: relative;
-            animation: modalSlideIn 0.3s ease-out;
-        }
-
-        @keyframes modalSlideIn {
-            from {
-                opacity: 0;
-                transform: translateY(-50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .close {
-            color: #aaa;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: color 0.3s ease;
-        }
-
-        .close:hover {
-            color: #667eea;
-        }
-
-        .modal-image {
-            width: 100%;
-            height: 250px;
-            background-size: cover;
-            background-position: center;
-            border-radius: 10px;
-            margin-bottom: 1.5rem;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .modal-image::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 80px;
-            background: linear-gradient(transparent, rgba(0,0,0,0.6));
-            z-index: 1;
-        }
-
-        .image-credit {
-            position: absolute;
-            bottom: 10px;
-            right: 10px;
-            color: white;
-            font-size: 0.7rem;
-            background: rgba(0,0,0,0.5);
-            padding: 2px 6px;
-            border-radius: 4px;
-            z-index: 2;
-        }
-
-        .modal-title {
-            font-size: 1.8rem;
-            color: #2c3e50;
-            margin-bottom: 1rem;
-        }
-            margin-bottom: 1rem;
-        }
-
-        .modal-info strong {
-            color: #667eea;
-        }
-
-        .footer {
-            background: #2c3e50;
-            color: white;
+        td {
+            padding: 12px 10px;
             text-align: center;
-            padding: 2rem 0;
+            border-bottom: 1px solid #ecf0f1;
+            vertical-align: middle;
         }
 
+        tbody tr:hover {
+            background-color: #f8f9fa;
+            transform: scale(1.01);
+            transition: all 0.3s ease;
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+
+        /* 해변 이름과 이미지 */
+        .beach-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .beach-image {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            object-fit: cover;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+
+        .beach-details {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .beach-name {
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .region {
+            color: #7f8c8d;
+            font-size: 0.9rem;
+        }
+
+        /* 바람 화살표 스타일 */
+        .wind-arrows {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .wind-arrow {
+            width: 35px;
+            height: 24px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            color: white;
+            font-weight: bold;
+            position: relative;
+            transition: transform 0.2s ease;
+        }
+
+        .wind-arrow:hover {
+            transform: scale(1.1);
+        }
+
+        .wind-arrow.offshore {
+            background: linear-gradient(135deg, #27ae60, #2ecc71);
+            box-shadow: 0 2px 4px rgba(39, 174, 96, 0.3);
+        }
+
+        .wind-arrow.onshore {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            box-shadow: 0 2px 4px rgba(231, 76, 60, 0.3);
+        }
+
+        /* 바닥 타입 스타일 */
+        .bottom-type {
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            color: white;
+            display: inline-block;
+        }
+
+        .bottom-type.sand {
+            background: linear-gradient(135deg, #f39c12, #e67e22);
+        }
+
+        .bottom-type.reef {
+            background: linear-gradient(135deg, #8e44ad, #9b59b6);
+        }
+
+        /* 계절 및 시간 스타일 */
+        .season {
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .time {
+            color: #7f8c8d;
+            font-size: 0.9rem;
+        }
+
+        /* 난이도 스타일 */
+        .difficulty {
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .difficulty.beginner {
+            background: #2ecc71;
+            color: white;
+        }
+
+        .difficulty.intermediate {
+            background: #f39c12;
+            color: white;
+        }
+
+        .difficulty.advanced {
+            background: #e74c3c;
+            color: white;
+        }
+
+        /* 범례 스타일 */
+        .legend {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .legend h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+
+        .legend-items {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* 팁 섹션 */
+        .tips {
+            background: #e8f5e8;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 5px solid #27ae60;
+        }
+
+        .tips h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+
+        .tips ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .tips li {
+            margin-bottom: 8px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .tips li::before {
+            content: "🌊";
+            position: absolute;
+            left: 0;
+        }
+
+        /* 반응형 디자인 */
         @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.5rem;
+            .container {
+                padding: 15px;
             }
             
-            .hero p {
-                font-size: 1.2rem;
+            header h1 {
+                font-size: 2rem;
             }
             
-            .spots-grid {
+            th, td {
+                padding: 8px 5px;
+                font-size: 0.8rem;
+            }
+            
+            .wind-arrows {
+                gap: 4px;
+            }
+            
+            .wind-arrow {
+                width: 28px;
+                height: 20px;
+                font-size: 14px;
+            }
+            
+            .beach-image {
+                width: 30px;
+                height: 30px;
+            }
+            
+            .beach-info {
+                gap: 6px;
+            }
+            
+            .legend-items {
                 grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
 <body>
-    <section class="hero">
-        <div class="hero-content">
-            <h1>🏄‍♀️ 한국 동해안 서핑</h1>
-            <p>파도와 함께 하는 특별한 경험을 만나보세요</p>
-            <a href="#spots" class="cta-button">서핑 스팟 둘러보기</a>
+    <div class="container">
+        <header>
+            <h1>🏄‍♂️ 한국 서핑 스팟 가이드</h1>
+            <p>국내 주요 서핑 스팟의 바람 조건, 바닥 타입, 베스트 시즌을 한눈에!</p>
+        </header>
+
+        <div class="table-container">
+            <table id="surf-spots-table">
+                <thead>
+                    <tr>
+                        <th>해변</th>
+                        <th>지역</th>
+                        <th>오프쇼어</th>
+                        <th>바닥 타입</th>
+                        <th>베스트 계절</th>
+                        <th>베스트 시간</th>
+                        <th>난이도</th>
+                    </tr>
+                </thead>
+                <tbody id="surf-spots-body">
+                    <!-- 데이터는 JavaScript로 삽입됩니다 -->
+                </tbody>
+            </table>
         </div>
-    </section>
 
-    <section id="spots" class="section">
-        <div class="container">
-            <h2 class="section-title">동해안 최고의 서핑 스팟</h2>
-            <div class="spots-grid">
-                <div class="spot-card" data-spot="yangyang">
-                    <div class="spot-image"></div>
-                    <div class="spot-content">
-                        <h3 class="spot-name">양양 죽도해변</h3>
-                        <div class="spot-location">📍 강원도 양양군</div>
-                        <div class="spot-description">
-                            한국 서핑의 메카로 불리는 양양 죽도해변은 연중 안정적인 파도와 넓은 해변으로 초보자부터 고수까지 모두가 즐길 수 있는 최고의 서핑 스팟입니다.
-                        </div>
-                        <div class="spot-features">
-                            <span class="feature-tag">초보자 추천</span>
-                            <span class="feature-tag">서핑샵 완비</span>
-                            <span class="feature-tag">연중무휴</span>
-                        </div>
-                    </div>
+        <div class="legend">
+            <h3>범례</h3>
+            <div class="legend-items">
+                <div class="legend-item">
+                    <div class="wind-arrow offshore">↓</div>
+                    <span>오프쇼어 화살표 (좋은 조건)</span>
                 </div>
-
-                <div class="spot-card" data-spot="sokcho">
-                    <div class="spot-image"></div>
-                    <div class="spot-content">
-                        <h3 class="spot-name">속초 외옹치해변</h3>
-                        <div class="spot-location">📍 강원도 속초시</div>
-                        <div class="spot-description">
-                            설악산과 바다를 동시에 감상할 수 있는 환상적인 로케이션의 서핑 스팟. 파도가 강하고 일정해서 숙련된 서퍼들에게 인기가 높습니다.
-                        </div>
-                        <div class="spot-features">
-                            <span class="feature-tag">숙련자 추천</span>
-                            <span class="feature-tag">경치 좋음</span>
-                            <span class="feature-tag">강한 파도</span>
-                        </div>
-                    </div>
+                <div class="legend-item">
+                    <div class="wind-arrow onshore">↑</div>
+                    <span>온쇼어 화살표 (피해야 할 조건)</span>
                 </div>
-
-                <div class="spot-card" data-spot="busan">
-                    <div class="spot-image"></div>
-                    <div class="spot-content">
-                        <h3 class="spot-name">부산 송정해변</h3>
-                        <div class="spot-location">📍 부산광역시 해운대구</div>
-                        <div class="spot-description">
-                            부산의 대표적인 서핑 스팟으로 도심과 가까워 접근성이 좋고, 다양한 편의시설이 잘 갖춰져 있어 서핑 초보자들에게 특히 인기가 높습니다.
-                        </div>
-                        <div class="spot-features">
-                            <span class="feature-tag">접근성 좋음</span>
-                            <span class="feature-tag">편의시설</span>
-                            <span class="feature-tag">도시형 서핑</span>
-                        </div>
-                    </div>
+                <div class="legend-item">
+                    <div class="bottom-type sand">모래</div>
+                    <span>모래 바닥 (맨발 OK)</span>
                 </div>
-
-                <div class="spot-card" data-spot="pohang">
-                    <div class="spot-image"></div>
-                    <div class="spot-content">
-                        <h3 class="spot-name">포항 구룡포해변</h3>
-                        <div class="spot-location">📍 경상북도 포항시</div>
-                        <div class="spot-description">
-                            한국 동해안의 숨겨진 보석 같은 서핑 스팟. 상대적으로 사람이 적고 깨끗한 바다와 일정한 파도로 프라이빗한 서핑을 즐길 수 있습니다.
-                        </div>
-                        <div class="spot-features">
-                            <span class="feature-tag">한적함</span>
-                            <span class="feature-tag">깨끗한 바다</span>
-                            <span class="feature-tag">프라이빗</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="spot-card" data-spot="ulsan">
-                    <div class="spot-image"></div>
-                    <div class="spot-content">
-                        <h3 class="spot-name">울산 일산해변</h3>
-                        <div class="spot-location">📍 울산광역시 동구</div>
-                        <div class="spot-description">
-                            울산의 대표 서핑 스팟으로 연중 안정적인 파도와 넓은 해변을 자랑합니다. 주변에 카페와 숙소가 많아 서핑 여행지로 인기가 높습니다.
-                        </div>
-                        <div class="spot-features">
-                            <span class="feature-tag">안정적 파도</span>
-                            <span class="feature-tag">숙박시설</span>
-                            <span class="feature-tag">여행 최적</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="spot-card" data-spot="gangneung">
-                    <div class="spot-image"></div>
-                    <div class="spot-content">
-                        <h3 class="spot-name">강릉 사천해변</h3>
-                        <div class="spot-location">📍 강원도 강릉시</div>
-                        <div class="spot-description">
-                            강릉의 숨은 서핑 명소로 파도의 질이 좋고 해변이 넓어 여유롭게 서핑을 즐길 수 있습니다. 특히 가을철 파도가 일품입니다.
-                        </div>
-                        <div class="spot-features">
-                            <span class="feature-tag">가을 최적</span>
-                            <span class="feature-tag">넓은 해변</span>
-                            <span class="feature-tag">좋은 파도</span>
-                        </div>
-                    </div>
+                <div class="legend-item">
+                    <div class="bottom-type reef">리프</div>
+                    <span>리프/바위 바닥 (부츠 필요)</span>
                 </div>
             </div>
         </div>
-    </section>
 
-    <div id="spotModal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <h2 class="modal-title"></h2>
-            <div class="modal-body"></div>
+        <div class="tips">
+            <h3>💡 서핑 팁</h3>
+            <ul>
+                <li><strong>바람 체크:</strong> 오프쇼어 바람일 때 파도가 깨끗하고 좋습니다</li>
+                <li><strong>조수간만의 차:</strong> 만조 2-3시간 전후가 일반적으로 좋습니다</li>
+                <li><strong>계절:</strong> 9-10월이 국내 서핑의 베스트 시즌입니다</li>
+                <li><strong>리프 스팟:</strong> 리프 부츠 착용을 권장합니다</li>
+                <li><strong>화살표 방향:</strong> 바람이 불어가는 방향을 나타냅니다</li>
+            </ul>
         </div>
     </div>
 
-    <footer class="footer">
-        <div class="container">
-            <p>&copy; 2025 한국 서핑 가이드. 파도와 함께하는 모든 순간을 응원합니다! 🌊</p>
-        </div>
-    </footer>
-
     <script>
-        // 스크롤 애니메이션
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.animationPlayState = 'running';
-                    entry.target.classList.add('animate');
-                }
-            });
-        }, observerOptions);
-
-        // 카드들에 애니메이션 추가
-        document.querySelectorAll('.spot-card').forEach((card, index) => {
-            card.style.animation = `fadeInUp 0.6s ease-out ${index * 0.1}s both paused`;
-            observer.observe(card);
-        });
-
-        // 부드러운 스크롤
-        document.querySelector('.cta-button').addEventListener('click', (e) => {
-            e.preventDefault();
-            document.getElementById('spots').scrollIntoView({
-                behavior: 'smooth'
-            });
-        });
-
-        // 모달 기능
-        const modal = document.getElementById('spotModal');
-        const modalTitle = document.querySelector('.modal-title');
-        const modalBody = document.querySelector('.modal-body');
-        const closeBtn = document.querySelector('.close');
-
-        const spotDetails = {
-            yangyang: {
-                title: "양양 죽도해변",
-                image: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
-                details: `
-                    <div class="modal-info">
-                        <strong>위치:</strong> 강원도 양양군 현북면 하조대해수욕장길
-                    </div>
-                    <div class="modal-info">
-                        <strong>파도 특성:</strong> 연중 일정한 파도, 초보자에게 적합한 1-2m 높이
-                    </div>
-                    <div class="modal-info">
-                        <strong>최적 시즌:</strong> 4월-10월 (특히 여름철 추천)
-                    </div>
-                    <div class="modal-info">
-                        <strong>편의시설:</strong> 서핑샵, 보드 렌탈, 강습, 샤워시설, 주차장
-                    </div>
-                    <div class="modal-info">
-                        <strong>특징:</strong> 한국 서핑의 성지로 불리며, 매년 국제 서핑 대회가 열리는 곳입니다. 해변이 넓고 파도가 일정해서 서핑을 배우기에 최적의 장소입니다.
-                    </div>
-                `
+        // 서핑 스팟 데이터
+        const surfSpots = [
+            {
+                name: "송정 해수욕장",
+                region: "부산",
+                image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=100&h=100&fit=crop",
+                offshore: ["NW", "N", "NE"],
+                onshore: ["SE", "S", "SW"],
+                bottomType: "sand",
+                bestSeason: "연중",
+                bestTime: "만조 2-3시간 전후",
+                difficulty: "beginner"
             },
-            sokcho: {
-                title: "속초 외옹치해변",
-                image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2073&q=80",
-                details: `
-                    <div class="modal-info">
-                        <strong>위치:</strong> 강원도 속초시 외옹치길
-                    </div>
-                    <div class="modal-info">
-                        <strong>파도 특성:</strong> 강하고 일정한 파도, 중급자 이상 추천
-                    </div>
-                    <div class="modal-info">
-                        <strong>최적 시즌:</strong> 연중 (겨울철도 서핑 가능)
-                    </div>
-                    <div class="modal-info">
-                        <strong>편의시설:</strong> 서핑샵, 카페, 펜션
-                    </div>
-                    <div class="modal-info">
-                        <strong>특징:</strong> 설악산을 배경으로 한 환상적인 경치와 함께 서핑을 즐길 수 있습니다. 파도가 강해서 스릴 있는 서핑이 가능합니다.
-                    </div>
-                `
+            {
+                name: "죽도 해변",
+                region: "양양",
+                image: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=100&h=100&fit=crop",
+                offshore: ["W", "NW", "SW"],
+                onshore: ["E", "NE", "SE"],
+                bottomType: "sand",
+                bestSeason: "9-11월",
+                bestTime: "만조시",
+                difficulty: "beginner"
             },
-            busan: {
-                title: "부산 송정해변",
-                image: "https://images.unsplash.com/photo-1544027993-37dbfe43562a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
-                details: `
-                    <div class="modal-info">
-                        <strong>위치:</strong> 부산광역시 해운대구 송정동
-                    </div>
-                    <div class="modal-info">
-                        <strong>파도 특성:</strong> 온화한 파도, 초보자부터 중급자까지 적합
-                    </div>
-                    <div class="modal-info">
-                        <strong>최적 시즌:</strong> 5월-9월
-                    </div>
-                    <div class="modal-info">
-                        <strong>편의시설:</strong> 지하철역 인근, 서핑샵, 카페, 레스토랑, 숙박시설
-                    </div>
-                    <div class="modal-info">
-                        <strong>특징:</strong> 부산 도심과 가까워 대중교통으로 접근이 쉽고, 다양한 편의시설과 먹거리가 풍부해서 서핑 여행지로 인기가 높습니다.
-                    </div>
-                `
+            {
+                name: "기사문 해변",
+                region: "양양",
+                image: "https://images.unsplash.com/photo-1544198365-f5d60b6d8190?w=100&h=100&fit=crop",
+                offshore: ["W", "NW", "SW"],
+                onshore: ["E", "NE", "SE"],
+                bottomType: "sand",
+                bestSeason: "9-11월",
+                bestTime: "만조 1-2시간 전",
+                difficulty: "intermediate"
             },
-            pohang: {
-                title: "포항 구룡포해변",
-                image: "https://images.unsplash.com/photo-1559827260-dc66d52bef19?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
-                details: `
-                    <div class="modal-info">
-                        <strong>위치:</strong> 경상북도 포항시 남구 구룡포읍
-                    </div>
-                    <div class="modal-info">
-                        <strong>파도 특성:</strong> 일정하고 깨끗한 파도
-                    </div>
-                    <div class="modal-info">
-                        <strong>최적 시즌:</strong> 4월-10월
-                    </div>
-                    <div class="modal-info">
-                        <strong>편의시설:</strong> 서핑샵, 게스트하우스, 해산물 식당
-                    </div>
-                    <div class="modal-info">
-                        <strong>특징:</strong> 상대적으로 사람이 적어 프라이빗하게 서핑을 즐길 수 있으며, 일출이 아름다운 곳으로 유명합니다. 구룡포 근대문화역사거리와 함께 관광할 수 있습니다.
-                    </div>
-                `
+            {
+                name: "서피비치",
+                region: "양양",
+                image: "https://images.unsplash.com/photo-1502680390469-be75c86b636f?w=100&h=100&fit=crop",
+                offshore: ["W", "NW", "SW"],
+                onshore: ["E", "NE", "SE"],
+                bottomType: "sand",
+                bestSeason: "9-11월",
+                bestTime: "만조시",
+                difficulty: "intermediate"
             },
-            ulsan: {
-                title: "울산 일산해변",
-                image: "https://images.unsplash.com/photo-1439066615861-d1af74d74000?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2073&q=80",
-                details: `
-                    <div class="modal-info">
-                        <strong>위치:</strong> 울산광역시 동구 일산동
-                    </div>
-                    <div class="modal-info">
-                        <strong>파도 특성:</strong> 안정적이고 예측 가능한 파도
-                    </div>
-                    <div class="modal-info">
-                        <strong>최적 시즌:</strong> 연중 (특히 봄, 가을 추천)
-                    </div>
-                    <div class="modal-info">
-                        <strong>편의시설:</strong> 서핑샵, 카페, 펜션, 캠핑장
-                    </div>
-                    <div class="modal-info">
-                        <strong>특징:</strong> 긴 해안선과 넓은 해변으로 여유롭게 서핑을 즐길 수 있으며, 주변에 대왕암공원 등 관광지가 많아 서핑과 관광을 함께 즐기기 좋습니다.
-                    </div>
-                `
+            {
+                name: "만리포 해변",
+                region: "태안",
+                image: "https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=100&h=100&fit=crop",
+                offshore: ["E", "NE", "SE"],
+                onshore: ["W", "NW", "SW"],
+                bottomType: "sand",
+                bestSeason: "봄, 가을",
+                bestTime: "만조시",
+                difficulty: "beginner"
             },
-            gangneung: {
-                title: "강릉 사천해변",
-                image: "https://images.unsplash.com/photo-1582719508461-905c673771fd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2025&q=80",
-                details: `
-                    <div class="modal-info">
-                        <strong>위치:</strong> 강원도 강릉시 사천면
-                    </div>
-                    <div class="modal-info">
-                        <strong>파도 특성:</strong> 계절별로 다양한 파도, 가을철 파도가 특히 좋음
-                    </div>
-                    <div class="modal-info">
-                        <strong>최적 시즌:</strong> 9월-11월 (가을철 최고)
-                    </div>
-                    <div class="modal-info">
-                        <strong>편의시설:</strong> 서핑샵, 카페, 민박
-                    </div>
-                    <div class="modal-info">
-                        <strong>특징:</strong> 강릉의 숨은 서핑 명소로 넓은 해변과 좋은 파도질로 유명합니다. 특히 가을철에는 최상의 서핑 조건을 만날 수 있습니다.
-                    </div>
-                `
+            {
+                name: "중문색달해변",
+                region: "제주",
+                image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=100&h=100&fit=crop",
+                offshore: ["N", "NE", "NW"],
+                onshore: ["S", "SE", "SW"],
+                bottomType: "reef",
+                bestSeason: "9-11월, 3-5월",
+                bestTime: "만조 2시간 전후",
+                difficulty: "advanced"
+            },
+            {
+                name: "고흥 해수욕장",
+                region: "전남 고흥",
+                image: "https://images.unsplash.com/photo-1544551763-77ef2d0cfc6c?w=100&h=100&fit=crop",
+                offshore: ["N", "NW", "NE"],
+                onshore: ["S", "SW", "SE"],
+                bottomType: "sand",
+                bestSeason: "연중",
+                bestTime: "만조시",
+                difficulty: "intermediate"
+            },
+            {
+                name: "월포해변",
+                region: "포항",
+                image: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=100&h=100&fit=crop",
+                offshore: ["W", "NW", "SW"],
+                onshore: ["E", "NE", "SE"],
+                bottomType: "sand",
+                bestSeason: "9-11월",
+                bestTime: "만조 1-2시간 전",
+                difficulty: "intermediate"
+            },
+            {
+                name: "대진해변",
+                region: "동해",
+                image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=100&h=100&fit=crop",
+                offshore: ["W", "NW", "SW"],
+                onshore: ["E", "NE", "SE"],
+                bottomType: "sand",
+                bestSeason: "9-11월",
+                bestTime: "만조 2시간 전후",
+                difficulty: "intermediate"
+            },
+            {
+                name: "정동진해변",
+                region: "강릉",
+                image: "https://images.unsplash.com/photo-1544198365-f5d60b6d8190?w=100&h=100&fit=crop",
+                offshore: ["W", "NW", "SW"],
+                onshore: ["E", "NE", "SE"],
+                bottomType: "sand",
+                bestSeason: "9-11월",
+                bestTime: "만조시",
+                difficulty: "beginner"
+            },
+            {
+                name: "속초해변",
+                region: "속초",
+                image: "https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=100&h=100&fit=crop",
+                offshore: ["W", "NW", "SW"],
+                onshore: ["E", "NE", "SE"],
+                bottomType: "sand",
+                bestSeason: "9-11월",
+                bestTime: "만조 1-2시간 전",
+                difficulty: "beginner"
+            },
+            {
+                name: "삼포해변",
+                region: "고성",
+                image: "https://images.unsplash.com/photo-1502680390469-be75c86b636f?w=100&h=100&fit=crop",
+                offshore: ["W", "NW", "SW"],
+                onshore: ["E", "NE", "SE"],
+                bottomType: "sand",
+                bestSeason: "9-11월",
+                bestTime: "만조시",
+                difficulty: "intermediate"
+            },
+            {
+                name: "강문해변",
+                region: "강릉",
+                image: "https://images.unsplash.com/photo-1544551763-77ef2d0cfc6c?w=100&h=100&fit=crop",
+                offshore: ["W", "NW", "SW"],
+                onshore: ["E", "NE", "SE"],
+                bottomType: "sand",
+                bestSeason: "9-11월",
+                bestTime: "만조 2시간 전후",
+                difficulty: "beginner"
+            },
+            {
+                name: "경포해변",
+                region: "강릉",
+                image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=100&h=100&fit=crop",
+                offshore: ["W", "NW", "SW"],
+                onshore: ["E", "NE", "SE"],
+                bottomType: "sand",
+                bestSeason: "9-11월",
+                bestTime: "만조시",
+                difficulty: "beginner"
             }
-        };
+        ];
 
-        document.querySelectorAll('.spot-card').forEach(card => {
-            card.addEventListener('click', () => {
-                const spotId = card.getAttribute('data-spot');
-                const spotData = spotDetails[spotId];
-                
-                modalTitle.textContent = spotData.title;
-                modalBody.innerHTML = `
-                    <div class="modal-image" style="background-image: url('${spotData.image}')">
-                        <div class="image-credit">Photo: Unsplash</div>
-                    </div>
-                    ${spotData.details}
-                `;
-                modal.style.display = 'block';
-                
-                // 모달 애니메이션
-                setTimeout(() => {
-                    modal.querySelector('.modal-content').style.animation = 'modalSlideIn 0.3s ease-out';
-                }, 10);
-            });
-        });
-
-        closeBtn.addEventListener('click', () => {
-            modal.style.display = 'none';
-        });
-
-        window.addEventListener('click', (e) => {
-            if (e.target === modal) {
-                modal.style.display = 'none';
-            }
-        });
-
-        // 키보드 이벤트 (ESC로 모달 닫기)
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && modal.style.display === 'block') {
-                modal.style.display = 'none';
-            }
-        });
-
-        // 카드 호버 효과 강화
-        document.querySelectorAll('.spot-card').forEach(card => {
-            card.addEventListener('mouseenter', () => {
-                card.style.transform = 'translateY(-10px) scale(1.02)';
+        // 바람 방향을 화살표로 변환
+        function createWindArrows(offshoreWinds, onshoreWinds) {
+            const arrows = [];
+            const windArrows = {
+                'N': '↓', 'NE': '↙', 'E': '←', 'SE': '↖',
+                'S': '↑', 'SW': '↗', 'W': '→', 'NW': '↘'
+            };
+            
+            // 오프쇼어 바람 (좋은 조건)
+            offshoreWinds.forEach(wind => {
+                arrows.push(`<div class="wind-arrow offshore" title="오프쇼어: ${wind} 바람">${windArrows[wind]}</div>`);
             });
             
-            card.addEventListener('mouseleave', () => {
-                card.style.transform = 'translateY(0) scale(1)';
-            });
-        });
+            return `<div class="wind-arrows">${arrows.join('')}</div>`;
+        }
 
-        // 로딩 애니메이션
-        window.addEventListener('load', () => {
-            document.body.classList.add('loaded');
+        // 바닥 타입을 스타일된 요소로 변환
+        function createBottomType(type) {
+            const typeMap = {
+                'sand': { text: '모래', class: 'sand' },
+                'reef': { text: '리프', class: 'reef' }
+            };
+            
+            const typeInfo = typeMap[type];
+            return `<div class="bottom-type ${typeInfo.class}">${typeInfo.text}</div>`;
+        }
+
+        // 난이도를 스타일된 요소로 변환
+        function createDifficulty(difficulty) {
+            const difficultyMap = {
+                'beginner': { text: '초급', class: 'beginner' },
+                'intermediate': { text: '중급', class: 'intermediate' },
+                'advanced': { text: '고급', class: 'advanced' }
+            };
+            
+            const diffInfo = difficultyMap[difficulty];
+            return `<div class="difficulty ${diffInfo.class}">${diffInfo.text}</div>`;
+        }
+
+        // 테이블 생성
+        function createTable() {
+            const tbody = document.getElementById('surf-spots-body');
+            
+            surfSpots.forEach(spot => {
+                const row = document.createElement('tr');
+                
+                row.innerHTML = `
+                    <td>
+                        <div class="beach-info">
+                            <img src="${spot.image}" alt="${spot.name}" class="beach-image">
+                            <div class="beach-details">
+                                <div class="beach-name">${spot.name}</div>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="region">${spot.region}</td>
+                    <td>${createWindArrows(spot.offshore, spot.onshore)}</td>
+                    <td>${createBottomType(spot.bottomType)}</td>
+                    <td class="season">${spot.bestSeason}</td>
+                    <td class="time">${spot.bestTime}</td>
+                    <td>${createDifficulty(spot.difficulty)}</td>
+                `;
+                
+                tbody.appendChild(row);
+            });
+        }
+
+        // 현재 시간 기반 추천
+        function getTimeRecommendation() {
+            const now = new Date();
+            const hour = now.getHours();
+            
+            if (hour >= 5 && hour <= 8) {
+                return "🌅 새벽 서핑 추천 시간입니다!";
+            } else if (hour >= 16 && hour <= 19) {
+                return "🌅 석양 서핑 추천 시간입니다!";
+            } else {
+                return "🏄‍♂️ 언제든지 서핑을 즐겨보세요!";
+            }
+        }
+
+        // 페이지 로드 시 실행
+        document.addEventListener('DOMContentLoaded', function() {
+            createTable();
+            
+            // 현재 시간 추천 표시
+            const container = document.querySelector('.container');
+            const timeRecommendation = document.createElement('div');
+            timeRecommendation.className = 'time-recommendation';
+            timeRecommendation.innerHTML = `
+                <div style="background: #3498db; color: white; padding: 15px; border-radius: 10px; text-align: center; margin-bottom: 20px;">
+                    ${getTimeRecommendation()}
+                </div>
+            `;
+            container.insertBefore(timeRecommendation, container.firstChild.nextSibling);
+            
+            // 테이블 행 클릭 이벤트
+            const tableRows = document.querySelectorAll('#surf-spots-body tr');
+            tableRows.forEach(row => {
+                row.addEventListener('click', function() {
+                    const beachName = this.querySelector('.beach-name').textContent;
+                    const region = this.querySelector('.region').textContent;
+                    
+                    alert(`${beachName} (${region})\n\n💡 팁: 오프쇼어 바람일 때 방문하세요!\n🌊 조수간만의 차 확인도 잊지 마세요!`);
+                });
+            });
         });
     </script>
 </body>
-</html> 
+</html>
