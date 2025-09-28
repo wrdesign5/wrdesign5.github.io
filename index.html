@@ -168,7 +168,7 @@
       <h3>범례</h3>
       <div class="legend-items">
         <div class="legend-item"><div class="wind-arrow offshore" aria-hidden="true">↓</div><span>오프쇼어 (좋은 조건)</span></div>
-        <div class="legend-item"><div class="wind-arrow onshore" aria-hidden="true">↑</div><span>온쇼어 (피하기)</span></div>
+        <span>온쇼어 (피하기)</span></div>
         <div class="legend-item"><div class="bottom-type sand">모래</div><span>맨발 OK</span></div>
         <div class="legend-item"><div class="bottom-type reef">리프</div><span>부츠 권장</span></div>
       </div>
@@ -182,7 +182,6 @@
         <li><strong>계절:</strong> 9–10월이 국내 베스트 시즌</li>
         <li><strong>리프:</strong> 리프 부츠 착용 권장</li>
         <li><strong>화살표:</strong> 바람이 불어가는 방향 표시</li>
-        <li><strong>오프쇼어일 때 파도 방향:</strong> 스웰은 해안선에 직각에 가깝게 바다→해안으로 들어오고, 바람은 그 반대(육지→바다)로 불수록 라인이 정돈됩니다. 예: 동해 동향 포인트는 E계열 스웰 + W계열 오프쇼어 조합이 좋습니다.</li>
       </ul>
 
       <!-- 바람-스웰 시각화 위젯 -->
@@ -280,21 +279,18 @@
     });
 
     function windGroup(spot){
-      const off = spot.offshore.map(w=>`<span class=\"wind-arrow offshore\" title=\"오프쇼어 ${w}\">${ARROWS[w]}</span>`).join('');
+      const off = spot.offshore
+        .map(w => `<span class=\"wind-arrow offshore\" title=\"오프쇼어 ${w}\">${ARROWS[w]}</span>`)
+        .join('');
       return `<div class=\"wind-arrows\" aria-label=\"오프쇼어\">${off}</div>`;
-    }">${ARROWS[w]}</span>`).join('');
-      const on = spot.onshore.map(w=>`<span class="wind-arrow onshore" title="온쇼어 ${w}">${ARROWS[w]}</span>`).join('');
-      return `<div class="wind-arrows" aria-label="바람"><div role="group" aria-label="오프쇼어">${off}</div><div role="group" aria-label="온쇼어">${on}</div></div>`;
-    }
 
-    function bottomBadge(type){
-      const map={ sand:{t:'모래',c:'sand'}, reef:{t:'리프',c:'reef'} };
-      const i=map[type]||{t:type,c:'sand'}; return `<span class="bottom-type ${i.c}">${i.t}</span>`;
-    }
-
-    function levelBadge(l){
-      const map={ beginner:{t:'초급',c:'beginner'}, intermediate:{t:'중급',c:'intermediate'}, advanced:{t:'고급',c:'advanced'} };
-      const i=map[l]||{t:l,c:'beginner'}; return `<span class="difficulty ${i.c}">${i.t}</span>`;
+    function applyFilters(){
+      const q = state.query.toLowerCase();
+      return surfSpots.filter(s=>
+        (!state.region || s.region===state.region) &&
+        (!state.level || s.difficulty===state.level) &&
+        (s.name.toLowerCase().includes(q) || s.region.toLowerCase().includes(q))
+      );
     }
 
     function rowTemplate(s){
@@ -320,21 +316,11 @@
       </article>`;
     }
 
-    function applyFilters(){
-      const q = state.query.toLowerCase();
-      return surfSpots.filter(s=>
-        (!state.region || s.region===state.region) &&
-        (!state.level || s.difficulty===state.level) &&
-        (s.name.toLowerCase().includes(q) || s.region.toLowerCase().includes(q))
-      );
-    }
-
     function render(){
       let data = applyFilters();
       data = data.sort((a,b)=> state.sortAsc ? a.name.localeCompare(b.name) : b.name.localeCompare(a.name));
       $tbody.innerHTML = data.map(rowTemplate).join('');
       $cards.innerHTML = data.map(cardTemplate).join('');
-      // row interactions (keyboard + click)
       [...$tbody.querySelectorAll('tr'), ...$cards.querySelectorAll('.card')].forEach(el=>{
         el.addEventListener('click', ()=> tip(el.querySelector('.beach-name')?.textContent || el.getAttribute('aria-label')));
         el.addEventListener('keyup', (e)=>{ if(e.key==='Enter' || e.key===' ') { e.preventDefault(); el.click(); } });
