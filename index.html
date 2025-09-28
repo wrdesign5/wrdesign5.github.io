@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>한국 서핑 스팟 가이드 – 개선안 v2</title>
+  <title>한국 서핑 스팟 가이드 – 안정판</title>
   <style>
     * { box-sizing: border-box; }
     :root{
@@ -15,7 +15,6 @@
       --good-1:#27ae60;--good-2:#2ecc71;
       --sand-1:#f39c12;--sand-2:#e67e22;
       --reef-1:#8e44ad;--reef-2:#9b59b6;
-      --mixed-1:#16a085;--mixed-2:#1abc9c;
     }
     html,body{height:100%}
     body{
@@ -43,8 +42,7 @@
     }
     .toggle{ cursor:pointer; border:1px solid rgba(255,255,255,.5); background:var(--glass-2); color:#03414e; padding:.55rem .8rem; border-radius:10px; }
 
-    .table-container{ overflow:auto; border-radius:12px; box-shadow:0 5px 15px rgba(0,0,0,.08); background:var(--glass);
-      --sticky: sticky; }
+    .table-container{ overflow:auto; border-radius:12px; box-shadow:0 5px 15px rgba(0,0,0,.08); background:var(--glass); --sticky: sticky; }
     table{ width:100%; border-collapse:collapse; backdrop-filter: blur(4px); }
     caption{ text-align:left; padding:10px 12px; color:#0b3b47; font-weight:600; }
     thead{ position:var(--sticky); top:0; z-index:2; background:linear-gradient(135deg, rgba(52,152,219,.9), rgba(41,128,185,.9)); color:white; }
@@ -74,7 +72,6 @@
     .bottom-type{ padding:5px 12px; border-radius:14px; font-size:.82rem; font-weight:700; color:white; display:inline-block; }
     .bottom-type.sand{ background:linear-gradient(135deg, var(--sand-1), var(--sand-2)); }
     .bottom-type.reef{ background:linear-gradient(135deg, var(--reef-1), var(--reef-2)); }
-    .bottom-type.mixed{ background:linear-gradient(135deg, var(--mixed-1), var(--mixed-2)); }
 
     .difficulty{ padding:4px 10px; border-radius:12px; font-size:.82rem; font-weight:700; color:white; }
     .beginner{ background:#2ecc71; }
@@ -96,7 +93,6 @@
     .card header{ display:flex; align-items:center; gap:10px; justify-content:flex-start; margin-bottom:8px; }
     .meta{ display:flex; gap:8px; flex-wrap:wrap; align-items:center; }
 
-    /* 접근성 향상 */
     :focus-visible{ outline: 3px solid #1f9bd1; outline-offset: 2px; border-radius:8px; }
     @media (max-width: 820px){
       .container{ padding:14px; }
@@ -106,9 +102,6 @@
       .table-container{ display:none; }
       .cards{ display:grid; }
       input[type="search"], select{ min-width:0; flex:1; }
-    }
-    @media (prefers-reduced-motion: reduce){
-      *{ animation:none !important; transition:none !important; }
     }
   </style>
 </head>
@@ -162,7 +155,7 @@
         <div class="legend-item"><div class="wind-arrow" aria-hidden="true">↓</div><span>오프쇼어 (좋은 조건)</span></div>
         <div class="legend-item"><div class="bottom-type sand">모래</div><span>맨발 OK</span></div>
         <div class="legend-item"><div class="bottom-type reef">리프</div><span>부츠 권장</span></div>
-        <div class="legend-item"><div class="bottom-type mixed">Mixed</div><span>모래+리프 혼합</span></div>
+        <div class="legend-item"><div class="bottom-type sand">모래</div><div class="bottom-type reef">리프</div><span>혼합 스팟</span></div>
       </div>
     </section>
 
@@ -197,10 +190,10 @@
       { name:"속초해변", region:"속초", image:"https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=200&h=200&fit=crop", offshore:["W","NW","SW"], onshore:["E","NE","SE"], bottomType:"sand", bestSeason:"9–11월", bestTime:"만조 1–2시간 전", difficulty:"beginner" },
       { name:"삼포해변", region:"고성", image:"https://images.unsplash.com/photo-1502680390469-be75c86b636f?w=200&h=200&fit=crop", offshore:["W","NW","SW"], onshore:["E","NE","SE"], bottomType:"sand", bestSeason:"9–11월", bestTime:"만조시", difficulty:"intermediate" },
       { name:"강문해변", region:"강릉", image:"https://images.unsplash.com/photo-1544551763-77ef2d0cfc6c?w=200&h=200&fit=crop", offshore:["W","NW","SW"], onshore:["E","NE","SE"], bottomType:"sand", bestSeason:"9–11월", bestTime:"만조 2시간 전후", difficulty:"beginner" },
-      { name:"경포해변", region:"강릉", image:"https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=200&h=200&fit=crop", offshore:["W","NW","SW"], onshore:["E","NE","SE"], bottomType:"sand", bestSeason:"9–11월", bestTime:"만조시", difficulty:"beginner" },
+      { name:"경포해변", region:"강릉", image:"https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=200&h=200&fit=crop", offshore:["W","NW","SW"], onshore:["E","NE","SE"], bottomType:"sand", bestSeason:"9–11월", bestTime:"만조시", difficulty:"beginner" }
     ];
 
-    // 사용자가 추가 요청한 스팟(기존 목록에 없는 것만 병합)
+    // 사용자 추가 스팟 (없는 것만 병합)
     (function addUserSpots(){
       const have = new Set(surfSpots.map(s=>s.name));
       const newSpots = [
@@ -224,12 +217,12 @@
         { name:"삼척 용화해변", region:"삼척", image:"https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=200&h=200&fit=crop", offshore:["W","NW","SW"], onshore:["E","NE","SE"], bottomType:"sand", bestSeason:"9–11월", bestTime:"만조 전후", difficulty:"intermediate" },
         { name:"포항 신항만해변", region:"포항", image:"https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=200&h=200&fit=crop", offshore:["W","NW","SW"], onshore:["E","NE","SE"], bottomType:"sand", bestSeason:"9–11월", bestTime:"만조", difficulty:"beginner" },
         { name:"울산 진하해변", region:"울산", image:"https://images.unsplash.com/photo-1544198365-f5d60b6d8190?w=200&h=200&fit=crop", offshore:["N","NE","NW"], onshore:["S","SE","SW"], bottomType:"sand", bestSeason:"봄·가을", bestTime:"만조 전후", difficulty:"beginner" },
-        { name:"고흥 남열 해돋이해변", region:"전남 고흥", image:"https://images.unsplash.com/photo-1544551763-77ef2d0cfc6c?w=200&h=200&fit=crop", offshore:["N","NE","NW"], onshore:["S","SE","SW"], bottomType:"sand", bestSeason:"봄·가을", bestTime:"만조 전후", difficulty:"intermediate" },
+        { name:"고흥 남열 해돋이해변", region:"전남 고흥", image:"https://images.unsplash.com/photo-1544551763-77ef2d0cfc6c?w=200&h=200&fit=crop", offshore:["N","NE","NW"], onshore:["S","SE","SW"], bottomType:"sand", bestSeason:"봄·가을", bestTime:"만조 전후", difficulty:"intermediate" }
       ];
       newSpots.forEach(s=>{ if(!have.has(s.name)) surfSpots.push(s); });
     })();
 
-    // 화살표 심볼: 바람/스웰이 "어디로 향하는지"를 보여주도록 반대방향 아이콘 매핑
+    // 아이콘(바람/스웰)
     const ARROWS = { N:"↓", NE:"↙", E:"←", SE:"↖", S:"↑", SW:"↗", W:"→", NW:"↘" };
 
     const $tbody = document.getElementById('tbody');
@@ -245,8 +238,8 @@
     function waveTripletFromOffshore(dir){
       const idx = DIRS.indexOf(dir);
       const opp = (idx + 4) % 8; // 반대 방향(스웰 중심)
-      const left = (opp + 7) % 8; // -45° 인접
-      const right = (opp + 1) % 8; // +45° 인접
+      const left = (opp + 7) % 8; // -45°
+      const right = (opp + 1) % 8; // +45°
       return [DIRS[left], DIRS[opp], DIRS[right]];
     }
 
@@ -264,12 +257,18 @@
     }
 
     function bottomBadge(type){
-      const map={ sand:{t:'모래',c:'sand'}, reef:{t:'리프',c:'reef'}, mixed:{t:'Mixed',c:'mixed'} };
-      const i=map[type]||{t:type,c:'sand'}; return `<span class="bottom-type ${i.c}">${i.t}</span>`;
+      if(type === 'mixed'){
+        // 혼합 스팟은 모래+리프 배지를 함께 표기
+        return `<span class="bottom-type sand">모래</span> <span class="bottom-type reef">리프</span>`;
+      }
+      const map={ sand:{t:'모래',c:'sand'}, reef:{t:'리프',c:'reef'} };
+      const i=map[type]||{t:type,c:'sand'};
+      return `<span class="bottom-type ${i.c}">${i.t}</span>`;
     }
     function levelBadge(l){
       const map={ beginner:{t:'초급',c:'beginner'}, intermediate:{t:'중급',c:'intermediate'}, advanced:{t:'고급',c:'advanced'} };
-      const i=map[l]||{t:l,c:'beginner'}; return `<span class="difficulty ${i.c}">${i.t}</span>`;
+      const i=map[l]||{t:l,c:'beginner'};
+      return `<span class="difficulty ${i.c}">${i.t}</span>`;
     }
 
     // region options
@@ -287,19 +286,36 @@
     }
 
     function rowTemplate(s){
-      return `<tr tabindex=\"0\">\n        <td><div class=\"beach-info\"><img loading=\"lazy\" src=\"${s.image}\" alt=\"${s.name} 사진\" class=\"beach-image\" width=\"44\" height=\"44\" /><div><div class=\"beach-name\">${s.name}</div></div></div></td>\n        <td class=\"region\">${s.region}</td>\n        <td>${windColumn(s.offshore)}</td>\n        <td>${waveColumn(s.offshore)}</td>\n        <td>${bottomBadge(s.bottomType)}</td>\n        <td class=\"season\">${s.bestSeason}</td>\n        <td class=\"time\">${s.bestTime}</td>\n        <td>${levelBadge(s.difficulty)}</td>\n      </tr>`;
+      return `<tr tabindex="0">
+        <td><div class="beach-info"><img loading="lazy" src="${s.image}" alt="${s.name} 사진" class="beach-image" width="44" height="44" /><div><div class="beach-name">${s.name}</div></div></div></td>
+        <td class="region">${s.region}</td>
+        <td>${windColumn(s.offshore)}</td>
+        <td>${waveColumn(s.offshore)}</td>
+        <td>${bottomBadge(s.bottomType)}</td>
+        <td class="season">${s.bestSeason}</td>
+        <td class="time">${s.bestTime}</td>
+        <td>${levelBadge(s.difficulty)}</td>
+      </tr>`;
     }
 
     function cardTemplate(s){
-      return `<article class=\"card\" tabindex=\"0\" aria-label=\"${s.name}\">\n        <header><img loading=\"lazy\" class=\"beach-image\" alt=\"${s.name} 사진\" src=\"${s.image}\" width=\"44\" height=\"44\" /><strong>${s.name}</strong><span class=\"region\">· ${s.region}</span></header>\n        <div class=\"meta\">${bottomBadge(s.bottomType)} ${levelBadge(s.difficulty)}</div>\n        <div class=\"meta\" style=\"display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:8px 0;\">\n          <div>${windColumn(s.offshore)}</div>\n          <div>${waveColumn(s.offshore)}</div>\n        </div>\n        <div class=\"meta\"><span>시즌: ${s.bestSeason}</span><span>베스트: ${s.bestTime}</span></div>\n      </article>`;
+      return `<article class="card" tabindex="0" aria-label="${s.name}">
+        <header><img loading="lazy" class="beach-image" alt="${s.name} 사진" src="${s.image}" width="44" height="44" /><strong>${s.name}</strong><span class="region">· ${s.region}</span></header>
+        <div class="meta">${bottomBadge(s.bottomType)} ${levelBadge(s.difficulty)}</div>
+        <div class="meta" style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:8px 0;">
+          <div>${windColumn(s.offshore)}</div>
+          <div>${waveColumn(s.offshore)}</div>
+        </div>
+        <div class="meta"><span>시즌: ${s.bestSeason}</span><span>베스트: ${s.bestTime}</span></div>
+      </article>`;
     }
 
     function render(){
       let data = applyFilters();
       data = data.sort((a,b)=> state.sortAsc ? a.name.localeCompare(b.name) : b.name.localeCompare(a.name));
-      document.getElementById('tbody').innerHTML = data.map(rowTemplate).join('');
-      document.getElementById('cards').innerHTML = data.map(cardTemplate).join('');
-      [...document.querySelectorAll('#tbody tr'), ...document.querySelectorAll('#cards .card')].forEach(el=>{
+      $tbody.innerHTML = data.map(rowTemplate).join('');
+      $cards.innerHTML = data.map(cardTemplate).join('');
+      [...$tbody.querySelectorAll('tr'), ...$cards.querySelectorAll('.card')].forEach(el=>{
         el.addEventListener('click', ()=> tip(el.querySelector('.beach-name')?.textContent || el.getAttribute('aria-label')));
         el.addEventListener('keyup', (e)=>{ if(e.key==='Enter' || e.key===' ') { e.preventDefault(); el.click(); } });
       });
@@ -323,21 +339,20 @@
     }
 
     // wiring
-    document.getElementById('q').addEventListener('input', (e)=>{ state.query = e.target.value; render(); });
-    document.getElementById('regionFilter').addEventListener('change', (e)=>{ state.region = e.target.value; render(); });
-    document.getElementById('levelFilter').addEventListener('change', (e)=>{ state.level = e.target.value; render(); });
-    document.getElementById('sortBtn').addEventListener('click', ()=>{
+    $q.addEventListener('input', (e)=>{ state.query = e.target.value; render(); });
+    $regionFilter.addEventListener('change', (e)=>{ state.region = e.target.value; render(); });
+    $levelFilter.addEventListener('change', (e)=>{ state.level = e.target.value; render(); });
+    $sortBtn.addEventListener('click', ()=>{
       state.sortAsc = !state.sortAsc;
-      const btn = document.getElementById('sortBtn');
-      btn.ariaPressed = String(!JSON.parse(btn.ariaPressed||'false'));
-      btn.textContent = state.sortAsc ? '가나다 순 정렬' : '가나다 역순 정렬';
+      $sortBtn.ariaPressed = String(!JSON.parse($sortBtn.ariaPressed||'false'));
+      $sortBtn.textContent = state.sortAsc ? '가나다 순 정렬' : '가나다 역순 정렬';
       render();
     });
 
-    // initial render
+    // 초기 렌더
     render();
 
-    // === 간단한 런타임 테스트(콘솔) ===
+    // --- 간단 테스트(콘솔) ---
     (function tests(){
       try {
         console.assert(JSON.stringify(waveTripletFromOffshore('W')) === JSON.stringify(['NE','E','SE']), 'Test W failed');
@@ -353,7 +368,6 @@
         console.warn('Runtime tests raised', e);
       }
     })();
-
   </script>
 </body>
 </html>
